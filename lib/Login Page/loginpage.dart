@@ -1,7 +1,10 @@
-import 'package:devfolio_genai/Login%20Page/Widgets/button.dart';
-import 'package:devfolio_genai/Login%20Page/Widgets/textfield_login.dart';
+import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
+import 'package:devfolio_genai/HomePage/homepage.dart';
+import 'package:devfolio_genai/Widgets/button.dart';
+import 'package:devfolio_genai/Widgets/textfield_login.dart';
 import 'package:devfolio_genai/Sign%20Up/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,9 +17,40 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  bool isloading = false;
+
+  //for experimental purpose
   void onTab() {
     print('Email: ${emailController.text}');
     print('Password: ${passwordController.text}');
+  }
+
+  void despose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void loginUser() async {
+    //sign up the user which is an async function
+    String resAuth = await AuthService().loginUser(
+        email: emailController.text, password: passwordController.text);
+
+    //if signup is successful, then lead to homepage
+    //else throw error
+    if (resAuth == "Success") {
+      setState(() {
+        isloading = true;
+      });
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const Homepage()));
+    } else {
+      setState(() {
+        isloading = false;
+      });
+      Fluttertoast.showToast(msg: resAuth, gravity: ToastGravity.BOTTOM);
+    }
   }
 
   @override
@@ -48,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPass: true,
               ),
               const Gap(20),
-              ButtonUI(name: "Login", onPressed: onTab),
+              ButtonUI(name: "Login", onPressed: loginUser),
               TextButton(
                 onPressed: () {
                   // Handle forgot password logic here

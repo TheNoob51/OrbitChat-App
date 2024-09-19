@@ -1,7 +1,7 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
 import 'package:devfolio_genai/HomePage/homepage.dart';
-import 'package:devfolio_genai/Login%20Page/Widgets/button.dart';
-import 'package:devfolio_genai/Login%20Page/Widgets/textfield_login.dart';
+import 'package:devfolio_genai/Widgets/button.dart';
+import 'package:devfolio_genai/Widgets/textfield_login.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
@@ -22,6 +22,14 @@ class _SignUpPageState extends State<SignUpPage> {
       TextEditingController();
   final TextEditingController nameSignupController = TextEditingController();
   bool isloading = false;
+
+  void despose() {
+    super.dispose();
+    emailSignupController.dispose();
+    passwordSignupController.dispose();
+    confirmpasswordSignupController.dispose();
+    nameSignupController.dispose();
+  }
 
   void signUpUser() async {
     //check if the confirm password and password are same
