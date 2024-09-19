@@ -43,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isloading = true;
       });
+      Fluttertoast.showToast(msg: "Logged in", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Homepage()));
     } else {

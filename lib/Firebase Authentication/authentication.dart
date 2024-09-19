@@ -15,21 +15,20 @@ class AuthService {
       }
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       res = "Success";
+    } on FirebaseAuthException catch (e) {
+      // Handle specific Firebase authentication errors
+      res = e.message ?? "An unknown error occurred";
     } catch (e) {
-      print(e.toString());
+      // Handle any other errors that might occur
+      res = "An unknown error occurred";
     }
     return res;
   }
 
-  // // Sign out
-  // Future<void> signOut() async {
-  //   try {
-  //     return await _auth.signOut();
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
+  // Sign out
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 
   // // Get current user
   // User? getCurrentUser() {
