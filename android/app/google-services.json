@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "963838749290",
+    "project_id": "devfolio-genblacks",
+    "storage_bucket": "devfolio-genblacks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963838749290:android:99d5e03d236a86e396f813",
+        "android_client_info": {
+          "package_name": "com.example.devfolio_genai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJEUq-Id6xZiWVaQEAsCdzlHNuCpvF_So"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
