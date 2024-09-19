@@ -22,15 +22,13 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController nameSignupController = TextEditingController();
   bool isloading = false;
 
-  //for experimentation
-  // void onTab() {
-  //   print('${emailSignupController.text}');
-  //   print('Password: ${passwordSignupController.text}');
-  //   print('Confirm Password: ${confirmpasswordSignupController.text}');
-  //   print('Name: ${nameSignupController.text}');
-  // }
-
   void signUpUser() async {
+    if (passwordSignupController.text != confirmpasswordSignupController.text) {
+      Fluttertoast.showToast(
+          msg: "Passwords do not match", gravity: ToastGravity.BOTTOM);
+      return;
+    }
+
     String resAuth = await AuthService().signUpUser(
         name: nameSignupController.text,
         email: emailSignupController.text,
