@@ -1,5 +1,6 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
 import 'package:devfolio_genai/HomePage/homepage.dart';
+import 'package:devfolio_genai/Login%20Page/Forget%20Password/forget_password.dart';
 import 'package:devfolio_genai/Widgets/button.dart';
 import 'package:devfolio_genai/Widgets/textfield_login.dart';
 import 'package:devfolio_genai/Sign%20Up/signup.dart';
@@ -54,6 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  final String forget = 'Forgot Password';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,12 +87,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const Gap(20),
               ButtonUI(name: "Login", onPressed: loginUser),
-              TextButton(
-                onPressed: () {
-                  // Handle forgot password logic here
-                },
-                child: const Text('Forgot Password?'),
-              ),
+              const Gap(10),
+              ForgotPassword(),
               Gap(MediaQuery.of(context).size.height * 0.12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
