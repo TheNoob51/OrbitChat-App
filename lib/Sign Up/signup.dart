@@ -14,6 +14,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  //all the controllers for the textfields
   final TextEditingController emailSignupController = TextEditingController();
   final TextEditingController passwordSignupController =
       TextEditingController();
@@ -23,12 +24,13 @@ class _SignUpPageState extends State<SignUpPage> {
   bool isloading = false;
 
   void signUpUser() async {
+    //check if the confirm password and password are same
     if (passwordSignupController.text != confirmpasswordSignupController.text) {
       Fluttertoast.showToast(
           msg: "Passwords do not match", gravity: ToastGravity.BOTTOM);
       return;
     }
-
+    //sign up the user which is an async function
     String resAuth = await AuthService().signUpUser(
         name: nameSignupController.text,
         email: emailSignupController.text,

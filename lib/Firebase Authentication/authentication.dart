@@ -44,27 +44,33 @@ class AuthService {
       {required String name,
       required String email,
       required String password}) async {
+    // Initialize the response string with a default error message
     String res = "Error";
     try {
+      // Check if any of the input fields are empty
       if (name.isEmpty || email.isEmpty || password.isEmpty) {
         return "Please fill all the fields";
       }
-      //for registering user in firebaseauth with email and password
+      // Register the user with Firebase Authentication using email and password
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      //for adding user data in firestore cloud
+      // Add the user data to Firestore under the "users" collection
       await _firestore.collection("users").doc(credential.user!.uid).set({
         "name": name,
         "email": email,
         "password": password,
         "uid": credential.user!.uid
       });
+      // If everything is successful, update the response to "Success"
       res = "Success";
     } on FirebaseAuthException catch (e) {
+      // Handle specific Firebase authentication errors
       res = e.message ?? "An unknown error occurred";
     } catch (e) {
+      // Handle any other errors that might occur
       res = "An unknown error occurred";
     }
+    // Return the response string
     return res;
   }
 }
