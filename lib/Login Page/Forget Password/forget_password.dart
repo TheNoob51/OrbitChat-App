@@ -63,7 +63,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
                 const Gap(20),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: TextFieldForLogin(
                       label: "Email",
                       iconfor: Icons.email,

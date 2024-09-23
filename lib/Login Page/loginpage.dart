@@ -22,10 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isloading = false;
 
   //for experimental purpose
-  void onTab() {
-    print('Email: ${emailController.text}');
-    print('Password: ${passwordController.text}');
-  }
+  // void onTab() {
+  //   print('Email: ${emailController.text}');
+  //   print('Password: ${passwordController.text}');
+  // }
 
   void despose() {
     super.dispose();
