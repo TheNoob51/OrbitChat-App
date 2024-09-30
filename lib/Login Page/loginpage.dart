@@ -27,6 +27,22 @@ class _LoginScreenState extends State<LoginScreen> {
   //   print('Password: ${passwordController.text}');
   // }
 
+  void googleSignIn() async {
+    String resGo = await AuthService().signInWithGoogle();
+    if (resGo == "Success") {
+      setState(() {
+        isloading = true;
+      });
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const Homepage()));
+    } else {
+      setState(() {
+        isloading = false;
+      });
+      Fluttertoast.showToast(msg: resGo, gravity: ToastGravity.BOTTOM);
+    }
+  }
+
   void despose() {
     super.dispose();
     emailController.dispose();
@@ -88,8 +104,14 @@ class _LoginScreenState extends State<LoginScreen> {
               const Gap(20),
               ButtonUI(name: "Login", onPressed: loginUser),
               const Gap(10),
-              ForgotPassword(),
-              Gap(MediaQuery.of(context).size.height * 0.12),
+              const ForgotPassword(),
+              Gap(MediaQuery.of(context).size.height * 0.05),
+              TextButton(
+                onPressed: () async {
+                  googleSignIn();
+                },
+                child: const Text('Google Login'),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

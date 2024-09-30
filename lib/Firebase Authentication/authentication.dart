@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+//<----------------------------------------------------------------------->
   // Sign in with email and password
   Future<String> loginUser(
       {required String email, required String password}) async {
@@ -25,22 +27,83 @@ class AuthService {
     return res;
   }
 
+//<----------------------------------------------------------------------->
   // Sign out
   Future<void> signOut() async {
     await _auth.signOut();
   }
 
-  // // Get current user
-  // User? getCurrentUser() {
-  //   try {
-  //     User? user = _auth.currentUser;
-  //     return user;
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
+//<----------------------------------------------------------------------->
+  // Get current user
+  User? getCurrentUser() {
+    try {
+      User? user = _auth.currentUser;
+      return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
+//<----------------------------------------------------------------------->
+
+  Future<String?> getUserName() async {
+    try {
+      User? user = _auth.currentUser;
+      if (user != null) {
+        DocumentSnapshot doc =
+            await _firestore.collection("users").doc(user.uid).get();
+        if (doc.exists) {
+          return doc["name"] ?? "No name found";
+        } else {
+          return "User document does not exist";
+        }
+      } else {
+        return "No user is currently signed in";
+      }
+    } catch (e) {
+      print(e.toString());
+      return "An error occurred while fetching the user name";
+    }
+  }
+
+//<----------------------------------------------------------------------->
+  // Sign in with Google
+  Future<String> signInWithGoogle() async {
+    String res = "Some Error Occurred";
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        return "Sign in aborted by user";
+      }
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Create a new credential
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in to Firebase with the Google user credential
+      await _auth.signInWithCredential(credential);
+
+      res = "Success";
+    } on FirebaseAuthException catch (e) {
+      // Handle specific Firebase authentication errors
+      res = e.message ?? "An unknown error occurred";
+    } catch (e) {
+      // Handle any other errors that might occur
+      res = "An unknown error occurred";
+    }
+    return res;
+  }
+
+//<----------------------------------------------------------------------->
   Future<String> signUpUser(
       {required String name,
       required String email,
@@ -75,3 +138,4 @@ class AuthService {
     return res;
   }
 }
+//<----------------------------------------------------------------------->
