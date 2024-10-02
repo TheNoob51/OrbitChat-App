@@ -34,6 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isloading = true;
       });
+      Fluttertoast.showToast(
+          msg: "Logged in using Google Account", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Homepage()));
     } else {
@@ -41,6 +43,24 @@ class _LoginScreenState extends State<LoginScreen> {
         isloading = false;
       });
       Fluttertoast.showToast(msg: resGo, gravity: ToastGravity.BOTTOM);
+    }
+  }
+
+  void signInAnoy() async {
+    String resAn = await AuthService().signInAnonymously();
+    if (resAn == "Success") {
+      setState(() {
+        isloading = true;
+      });
+      Fluttertoast.showToast(
+          msg: "Logged in Anoymously", gravity: ToastGravity.BOTTOM);
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const Homepage()));
+    } else {
+      setState(() {
+        isloading = false;
+      });
+      Fluttertoast.showToast(msg: resAn, gravity: ToastGravity.BOTTOM);
     }
   }
 
@@ -151,22 +171,44 @@ class _LoginScreenState extends State<LoginScreen> {
                     textStyle:
                         TextStyle(color: Colors.grey[500]!, fontSize: 12)),
                 const Gap(10),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all<Color>(Colors.white),
-                    shape: WidgetStateProperty.all<CircleBorder>(
-                      const CircleBorder(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all<Color>(Colors.white),
+                        shape: WidgetStateProperty.all<CircleBorder>(
+                          const CircleBorder(),
+                        ),
+                      ),
+                      onPressed: googleSignIn,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.network(
+                          'https://img.icons8.com/color/452/google-logo.png',
+                          height: 30,
+                        ),
+                      ),
                     ),
-                  ),
-                  onPressed: googleSignIn,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Image.network(
-                      'https://img.icons8.com/color/452/google-logo.png',
-                      height: 30,
-                    ),
-                  ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all<Color>(Colors.white),
+                        shape: WidgetStateProperty.all<CircleBorder>(
+                          const CircleBorder(),
+                        ),
+                      ),
+                      onPressed: signInAnoy,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.network(
+                          'https://img.icons8.com/?size=100&id=pETkiIKt6qBf&format=png&color=000000',
+                          height: 30,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 const Gap(20),
                 Row(

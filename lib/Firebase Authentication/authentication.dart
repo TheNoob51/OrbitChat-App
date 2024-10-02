@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
 
 class AuthService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -40,7 +43,7 @@ class AuthService {
       User? user = _auth.currentUser;
       return user;
     } catch (e) {
-      print(e.toString());
+      logger.i(e.toString());
       return null;
     }
   }
@@ -51,12 +54,16 @@ class AuthService {
     try {
       User? user = _auth.currentUser;
       if (user != null) {
-        DocumentSnapshot doc =
-            await _firestore.collection("users").doc(user.uid).get();
-        if (doc.exists) {
-          return doc["name"] ?? "No name found";
+        if (user.isAnonymous) {
+          return "Anonymous";
         } else {
-          return "User document does not exist";
+          DocumentSnapshot doc =
+              await _firestore.collection("users").doc(user.uid).get();
+          if (doc.exists) {
+            return doc["name"] ?? "No name found";
+          } else {
+            return "User document does not exist";
+          }
         }
       } else {
         return "No user is currently signed in";
@@ -90,7 +97,21 @@ class AuthService {
       );
 
       // Sign in to Firebase with the Google user credential
-      await _auth.signInWithCredential(credential);
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+      // Get the user details
+      User? user = userCredential.user;
+      if (user != null) {
+        // Check if the user document already exists
+        DocumentSnapshot doc =
+            await _firestore.collection("users").doc(user.uid).get();
+        if (!doc.exists) {
+          // If the document does not exist, create a new one
+          await _firestore.collection("users").doc(user.uid).set(
+              {"name": user.displayName, "email": user.email, "uid": user.uid});
+        }
+      }
 
       res = "Success";
     } on FirebaseAuthException catch (e) {
@@ -98,6 +119,21 @@ class AuthService {
       res = e.message ?? "An unknown error occurred";
     } catch (e) {
       // Handle any other errors that might occur
+      res = "An unknown error occurred";
+    }
+    return res;
+  }
+
+//<----------------------------------------------------------------------->
+//signin anonymously
+  Future<String> signInAnonymously() async {
+    String res = "Some Error Occurred";
+    try {
+      await _auth.signInAnonymously();
+      res = "Success";
+    } on FirebaseAuthException catch (e) {
+      res = e.message ?? "An unknown error occurred";
+    } catch (e) {
       res = "An unknown error occurred";
     }
     return res;
