@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ButtonUI extends StatelessWidget {
-  const ButtonUI({
-    super.key,
-    required this.name,
-    required this.onPressed,
-  });
+  const ButtonUI({super.key, required this.name, required this.onPressed});
 
   final String name;
   final VoidCallback onPressed;
@@ -17,16 +13,21 @@ class ButtonUI extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15),
         width: MediaQuery.of(context).size.width,
-        decoration: ShapeDecoration(
+        decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8,
+              offset: const Offset(2, 2),
+            ),
+          ],
         ),
         child: Center(
           child: Text(
             name,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),

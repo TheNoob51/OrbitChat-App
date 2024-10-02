@@ -1,3 +1,4 @@
+import 'package:devfolio_genai/Widgets/button.dart';
 import 'package:devfolio_genai/Widgets/textfield_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,21 +15,29 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController emailController = TextEditingController();
   final auth = FirebaseAuth.instance;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
         fpdialogBox(context);
       },
-      child: Text(
+      child: const Text(
         'Forgot Password?',
-        style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        style: TextStyle(color: Colors.blueAccent),
       ),
     );
   }
 
   void fpdialogBox(BuildContext context) {
     showDialog(
+      useRootNavigator: false,
       context: context,
       builder: (BuildContext context) {
         return Dialog(
@@ -48,7 +57,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       child: Text(
                         'Forgot Your Password',
                         textAlign: TextAlign.left,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 19),
                       ),
                     ),
                     Align(
@@ -62,40 +71,32 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ],
                 ),
                 const Gap(20),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFieldForLogin(
-                      label: "Email",
-                      iconfor: Icons.email,
-                      textEditingController: emailController,
-                      isPass: false),
-                ),
+                TextFieldForLogin(
+                    label: "Email",
+                    iconfor: Icons.email,
+                    textEditingController: emailController,
+                    isPass: false),
                 const Gap(20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                  ),
-                  onPressed: () async {
-                    await auth
-                        .sendPasswordResetEmail(email: emailController.text)
-                        .then((value) {
-                      Fluttertoast.showToast(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
-                          msg: 'Password reset link sent to your email',
-                          gravity: ToastGravity.BOTTOM);
-                      Navigator.pop(context);
-                    }).onError((error, stackTrace) {
-                      Fluttertoast.showToast(
-                          backgroundColor: Theme.of(context).colorScheme.error,
-                          msg: error.toString(),
-                          gravity: ToastGravity.BOTTOM);
-                    });
-                  },
-                  child: Text('Submit',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary)),
-                ),
+                ButtonUI(
+                    name: "Submit",
+                    onPressed: () async {
+                      await auth
+                          .sendPasswordResetEmail(email: emailController.text)
+                          .then((value) {
+                        Fluttertoast.showToast(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            msg: 'Password reset link sent to your email',
+                            gravity: ToastGravity.BOTTOM);
+                        Navigator.pop(context);
+                      }).onError((error, stackTrace) {
+                        Fluttertoast.showToast(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
+                            msg: error.toString(),
+                            gravity: ToastGravity.BOTTOM);
+                      });
+                    })
               ],
             ),
           ),

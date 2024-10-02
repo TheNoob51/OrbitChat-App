@@ -26,7 +26,11 @@ class TextFieldForLogin extends StatelessWidget {
       },
       decoration: InputDecoration(
         prefixIcon: Icon(iconfor),
-        border: const OutlineInputBorder(),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        filled: true,
+        fillColor: Colors.grey[200],
         labelText: label,
       ),
     );

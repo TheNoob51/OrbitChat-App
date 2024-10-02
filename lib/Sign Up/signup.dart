@@ -23,12 +23,13 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController nameSignupController = TextEditingController();
   bool isloading = false;
 
-  void despose() {
-    super.dispose();
+  @override
+  void dispose() {
     emailSignupController.dispose();
     passwordSignupController.dispose();
     confirmpasswordSignupController.dispose();
     nameSignupController.dispose();
+    super.dispose();
   }
 
   void signUpUser() async {
@@ -38,11 +39,12 @@ class _SignUpPageState extends State<SignUpPage> {
           msg: "Passwords do not match", gravity: ToastGravity.BOTTOM);
       return;
     }
-    //sign up the user which is an async function
+
     String resAuth = await AuthService().signUpUser(
-        name: nameSignupController.text,
-        email: emailSignupController.text,
-        password: passwordSignupController.text);
+      name: nameSignupController.text,
+      email: emailSignupController.text,
+      password: passwordSignupController.text,
+    );
 
     //if signup is successful, then lead to homepage
     //else throw error
@@ -64,58 +66,85 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Gap(150),
-                const Text("Sign Up",
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                const Gap(20),
-                TextFieldForLogin(
-                    label: "Name",
-                    iconfor: Icons.person,
-                    textEditingController: nameSignupController,
-                    isPass: false),
-                const Gap(20),
-                TextFieldForLogin(
-                    label: "Email",
-                    iconfor: Icons.email,
-                    textEditingController: emailSignupController,
-                    isPass: false),
-                const Gap(20),
-                TextFieldForLogin(
-                  label: "Password",
-                  iconfor: Icons.password,
-                  textEditingController: passwordSignupController,
-                  isPass: true,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF007BFF), Color(0xFF00C6FF)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Center(
+              child: Card(
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                const Gap(20),
-                TextFieldForLogin(
-                    label: "Confirm Password",
-                    iconfor: Icons.password_sharp,
-                    textEditingController: confirmpasswordSignupController,
-                    isPass: true),
-                const Gap(20),
-                ButtonUI(name: "Sign Up", onPressed: signUpUser),
-                Gap(MediaQuery.of(context).size.height * 0.07),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Already have an account?'),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Login'),
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Gap(20),
+                      const Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87),
+                      ),
+                      const Gap(30),
+                      TextFieldForLogin(
+                        label: "Name",
+                        iconfor: Icons.person,
+                        textEditingController: nameSignupController,
+                        isPass: false,
+                      ),
+                      const Gap(20),
+                      TextFieldForLogin(
+                        label: "Email",
+                        iconfor: Icons.email,
+                        textEditingController: emailSignupController,
+                        isPass: false,
+                      ),
+                      const Gap(20),
+                      TextFieldForLogin(
+                        label: "Password",
+                        iconfor: Icons.lock,
+                        textEditingController: passwordSignupController,
+                        isPass: true,
+                      ),
+                      const Gap(20),
+                      TextFieldForLogin(
+                        label: "Confirm Password",
+                        iconfor: Icons.lock_outline,
+                        textEditingController: confirmpasswordSignupController,
+                        isPass: true,
+                      ),
+                      const Gap(30),
+                      ButtonUI(name: "Sign Up", onPressed: signUpUser),
+                      const Gap(20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Already have an account?'),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Login'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
           ),
         ),

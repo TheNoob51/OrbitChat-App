@@ -2,6 +2,7 @@ import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
 import 'package:devfolio_genai/HomePage/homepage.dart';
 import 'package:devfolio_genai/Login%20Page/Forget%20Password/forget_password.dart';
 import 'package:devfolio_genai/Widgets/button.dart';
+import 'package:devfolio_genai/Widgets/dividerwithtext.dart';
 import 'package:devfolio_genai/Widgets/textfield_login.dart';
 import 'package:devfolio_genai/Sign%20Up/signup.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void despose() {
-    super.dispose();
+  @override
+  void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    super.dispose();
   }
 
   void loginUser() async {
@@ -76,59 +78,120 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Gap(MediaQuery.of(context).size.height * 0.30),
-              const Text(
-                'Welcome to EduApp',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const Gap(20),
-              TextFieldForLogin(
-                  label: "Email",
-                  iconfor: Icons.email,
-                  textEditingController: emailController,
-                  isPass: false),
-              const Gap(20),
-              TextFieldForLogin(
-                label: "Password",
-                iconfor: Icons.password,
-                textEditingController: passwordController,
-                isPass: true,
-              ),
-              const Gap(20),
-              ButtonUI(name: "Login", onPressed: loginUser),
-              const Gap(10),
-              const ForgotPassword(),
-              Gap(MediaQuery.of(context).size.height * 0.05),
-              TextButton(
-                onPressed: () async {
-                  googleSignIn();
-                },
-                child: const Text('Google Login'),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Don\'t have an account?'),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUpPage(),
-                          ));
-                    },
-                    child: const Text('Sign Up'),
+      body: Container(
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF007BFF), Color(0xFF00C6FF)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Icon(Icons.abc_outlined,
+                    size: 100, color: Colors.blueAccent),
+                const Text(
+                  'Welcome to EduApp',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
                   ),
-                ],
-              ),
-            ],
+                ),
+                const Gap(10),
+                const Text(
+                  'Login to continue',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+                const Gap(30),
+                TextFieldForLogin(
+                  label: "Email",
+                  iconfor: Icons.email_outlined,
+                  textEditingController: emailController,
+                  isPass: false,
+                ),
+                const Gap(20),
+                TextFieldForLogin(
+                  label: "Password",
+                  iconfor: Icons.lock_outline,
+                  textEditingController: passwordController,
+                  isPass: true,
+                ),
+                const Gap(10),
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: ForgotPassword(),
+                ),
+                const Gap(10),
+                ButtonUI(name: "Login", onPressed: loginUser),
+                const Gap(20),
+                DividerWithText(
+                    text: "OR",
+                    color: Colors.grey[300]!,
+                    textStyle:
+                        TextStyle(color: Colors.grey[500]!, fontSize: 12)),
+                const Gap(10),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all<Color>(Colors.white),
+                    shape: WidgetStateProperty.all<CircleBorder>(
+                      const CircleBorder(),
+                    ),
+                  ),
+                  onPressed: googleSignIn,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Image.network(
+                      'https://img.icons8.com/color/452/google-logo.png',
+                      height: 30,
+                    ),
+                  ),
+                ),
+                const Gap(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account?"),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage()));
+                      },
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
