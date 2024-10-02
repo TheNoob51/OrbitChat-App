@@ -41,6 +41,12 @@ class AuthService {
   User? getCurrentUser() {
     try {
       User? user = _auth.currentUser;
+      if (user!.isAnonymous) {
+        if (user.email == null || user.email!.isEmpty) {
+          return null;
+        }
+        return user;
+      }
       return user;
     } catch (e) {
       logger.i(e.toString());

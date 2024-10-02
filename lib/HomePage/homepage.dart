@@ -1,9 +1,10 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
+import 'package:devfolio_genai/GenerativeAIModule/generativeai.dart';
 import 'package:devfolio_genai/Login%20Page/loginpage.dart';
-import 'package:devfolio_genai/Widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -15,10 +16,33 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   String? userName;
   bool isLoading = true;
-  final List<String> messages = [
-    "Welcome to EduChat!",
-    "How can I assist you today?"
-  ]; // Sample messages
+  final List<GeminiMessage> messages = [
+    GeminiMessage(
+        isUser: false,
+        message: "Welcome to DSA Sage! , How can I assist you today?",
+        time: DateTime.now()),
+  ];
+
+  Future<void> sendRecieveMessage(String message) async {
+    setState(() {
+      messages.add(
+          GeminiMessage(time: DateTime.now(), message: message, isUser: true));
+    });
+
+    final content = [Content.text(message)];
+    final response = await model.generateContent(content);
+    setState(() {
+      messages.add(GeminiMessage(
+          time: DateTime.now(),
+          message: response.text ?? "No Message",
+          isUser: false));
+    });
+  }
+
+  static const apiKey = "AIzaSyDNlbJvVlSVNsTZq_2peJGIcgXCG-cW5gA";
+  final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
+
+  TextEditingController promptController = TextEditingController();
 
   @override
   void initState() {
@@ -134,19 +158,46 @@ class _HomepageState extends State<Homepage> {
               padding: const EdgeInsets.all(16),
               itemCount: messages.length,
               itemBuilder: (context, index) {
-                bool isUser = index % 2 == 0; // Alternate between user and bot
+                final message = messages[index];
+                bool isUser = index % 2 != 0; // Alternate between user and bot
                 return Align(
                   alignment:
                       isUser ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.6,
+                    ),
                     margin: const EdgeInsets.symmetric(vertical: 4),
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color:
-                          isUser ? Colors.blue.shade100 : Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(15),
+                      color: isUser
+                          ? Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.1)
+                          : Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(15),
+                        topRight: const Radius.circular(15),
+                        bottomLeft: isUser
+                            ? const Radius.circular(15)
+                            : const Radius.circular(0),
+                        bottomRight: isUser
+                            ? const Radius.circular(0)
+                            : const Radius.circular(15),
+                      ),
                     ),
-                    child: Text(messages[index]),
+                    child: Text(
+                      message.message,
+                      style: TextStyle(
+                        color: isUser
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
                   ),
                 );
               },
@@ -162,6 +213,7 @@ class _HomepageState extends State<Homepage> {
                 Expanded(
                   flex: 25,
                   child: TextField(
+                    controller: promptController,
                     onTapOutside: (event) {
                       FocusScope.of(context).unfocus();
                     },
@@ -185,7 +237,15 @@ class _HomepageState extends State<Homepage> {
                   ),
                   icon: const Icon(Icons.send, size: 30, color: Colors.white),
                   onPressed: () {
-                    // Logic for sending a message will be added here
+                    if (promptController.text.isEmpty) {
+                      Fluttertoast.showToast(
+                          msg: "Please enter a message",
+                          gravity: ToastGravity.BOTTOM);
+                      return;
+                    }
+                    sendRecieveMessage(promptController.text +
+                        " by socratic method, just prompt me with a question and eventually answer it");
+                    promptController.clear();
                   },
                 ),
               ],

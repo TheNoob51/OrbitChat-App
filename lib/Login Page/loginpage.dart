@@ -125,8 +125,11 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Icon(Icons.abc_outlined,
-                    size: 100, color: Colors.blueAccent),
+                Image.asset(
+                  'assets/images/logo/logo.png',
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  width: MediaQuery.of(context).size.height * 0.25,
+                ),
                 const Text(
                   'Welcome to EduApp',
                   style: TextStyle(
