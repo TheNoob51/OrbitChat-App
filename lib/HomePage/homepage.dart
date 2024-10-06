@@ -2,6 +2,7 @@ import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
 import 'package:devfolio_genai/GenerativeAIModule/generativeai.dart';
 import 'package:devfolio_genai/Login%20Page/loginpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -19,7 +20,7 @@ class _HomepageState extends State<Homepage> {
   final List<GeminiMessage> messages = [
     GeminiMessage(
         isUser: false,
-        message: "Welcome to DSA Sage! , How can I assist you today?",
+        message: "Welcome to OrbitChat! , How can I assist you today?",
         time: DateTime.now()),
   ];
 
@@ -79,13 +80,19 @@ class _HomepageState extends State<Homepage> {
           // Header Section
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.blue.shade600, Colors.blue.shade300],
+                colors: [
+                  Color(0xFF0B3D91), // Space Cadet
+                  Color(0xFF1D2951), // Prussian Blue
+                  Color(0xFF2E3A59), // Gunmetal
+                  Color(0xFF4B0082), // Indigo
+                  Color(0xFF6A5ACD), // Slate Blue
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
               ),
@@ -164,41 +171,40 @@ class _HomepageState extends State<Homepage> {
                   alignment:
                       isUser ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width * 0.6,
-                    ),
-                    margin: const EdgeInsets.symmetric(vertical: 4),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isUser
-                          ? Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.1)
-                          : Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.1),
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(15),
-                        topRight: const Radius.circular(15),
-                        bottomLeft: isUser
-                            ? const Radius.circular(15)
-                            : const Radius.circular(0),
-                        bottomRight: isUser
-                            ? const Radius.circular(0)
-                            : const Radius.circular(15),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.6,
                       ),
-                    ),
-                    child: Text(
-                      message.message,
-                      style: TextStyle(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
                         color: isUser
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.secondary,
+                            ? Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.1)
+                            : Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.1),
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(15),
+                          topRight: const Radius.circular(15),
+                          bottomLeft: isUser
+                              ? const Radius.circular(15)
+                              : const Radius.circular(0),
+                          bottomRight: isUser
+                              ? const Radius.circular(0)
+                              : const Radius.circular(15),
+                        ),
                       ),
-                    ),
-                  ),
+                      child: MarkdownBody(
+                        data: message.message,
+                        selectable: true,
+                        styleSheet: MarkdownStyleSheet(
+                            p: TextStyle(
+                          color: isUser ? Colors.purple[700] : Colors.black,
+                        )),
+                      )),
                 );
               },
             ),
@@ -243,8 +249,7 @@ class _HomepageState extends State<Homepage> {
                           gravity: ToastGravity.BOTTOM);
                       return;
                     }
-                    sendRecieveMessage(promptController.text +
-                        " by socratic method, just prompt me with a question and eventually answer it");
+                    sendRecieveMessage(promptController.text);
                     promptController.clear();
                   },
                 ),

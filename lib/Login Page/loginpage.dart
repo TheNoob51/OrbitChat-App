@@ -93,8 +93,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  final String forget = 'Forgot Password';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF007BFF), Color(0xFF00C6FF)],
+            colors: [
+              Color(0xFF0B3D91), // Space Cadet
+              Color(0xFF1D2951), // Prussian Blue
+              Color(0xFF2E3A59), // Gunmetal
+              Color(0xFF4B0082), // Indigo
+              Color(0xFF6A5ACD), // Slate Blue
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -126,12 +130,12 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
-                  'assets/images/logo/logo.png',
+                  'assets/images/logo/logo2.png',
                   height: MediaQuery.of(context).size.height * 0.25,
                   width: MediaQuery.of(context).size.height * 0.25,
                 ),
                 const Text(
-                  'Welcome to EduApp',
+                  'Welcome to OrbitChat',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
