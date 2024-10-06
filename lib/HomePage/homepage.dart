@@ -16,7 +16,8 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   String? userName;
-  bool isLoading = true;
+  bool isLoading = true; // To indicate the screen loading state
+  bool isApiLoading = false; // To indicate API loading state
   final List<GeminiMessage> messages = [
     GeminiMessage(
         isUser: false,
@@ -25,18 +26,23 @@ class _HomepageState extends State<Homepage> {
   ];
 
   Future<void> sendRecieveMessage(String message) async {
+    // Add user message to the list
     setState(() {
       messages.add(
           GeminiMessage(time: DateTime.now(), message: message, isUser: true));
+      isApiLoading = true; // Start loading the API response
     });
 
     final content = [Content.text(message)];
     final response = await model.generateContent(content);
+
+    // Add the AI response message
     setState(() {
       messages.add(GeminiMessage(
           time: DateTime.now(),
           message: response.text ?? "No Message",
           isUser: false));
+      isApiLoading = false; // Stop loading after receiving the response
     });
   }
 
@@ -163,10 +169,20 @@ class _HomepageState extends State<Homepage> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
-              itemCount: messages.length,
+              itemCount: messages.length +
+                  (isApiLoading
+                      ? 1
+                      : 0), // Add a slot for the loading indicator
               itemBuilder: (context, index) {
+                if (index == messages.length && isApiLoading) {
+                  return const Center(
+                    child:
+                        CircularProgressIndicator(), // Loading indicator for API
+                  );
+                }
+
                 final message = messages[index];
-                bool isUser = index % 2 != 0; // Alternate between user and bot
+                bool isUser = message.isUser;
                 return Align(
                   alignment:
                       isUser ? Alignment.centerRight : Alignment.centerLeft,
