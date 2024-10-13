@@ -1,11 +1,13 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
 import 'package:devfolio_genai/GenerativeAIModule/generativeai.dart';
+import 'package:devfolio_genai/HomePage/key.dart';
 import 'package:devfolio_genai/Login%20Page/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -46,7 +48,6 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
-  static const apiKey = "AIzaSyDNlbJvVlSVNsTZq_2peJGIcgXCG-cW5gA";
   final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
 
   TextEditingController promptController = TextEditingController();
@@ -175,10 +176,16 @@ class _HomepageState extends State<Homepage> {
                       : 0), // Add a slot for the loading indicator
               itemBuilder: (context, index) {
                 if (index == messages.length && isApiLoading) {
-                  return const Center(
-                    child:
-                        CircularProgressIndicator(), // Loading indicator for API
+                  return Center(
+                    child: LoadingAnimationWidget.newtonCradle(
+                      color: Colors.purple,
+                      size: 60.0,
+                    ),
                   );
+                  // return const Center(
+                  //   child:
+                  //       CircularProgressIndicator(), // Loading indicator for API
+                  // );
                 }
 
                 final message = messages[index];
