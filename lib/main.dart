@@ -1,4 +1,4 @@
-import 'package:devfolio_genai/HomePage/homepage.dart';
+import 'package:devfolio_genai/Landing%20Home%20Page/Main_Home.dart';
 import 'package:devfolio_genai/firebase_options.dart';
 import 'package:devfolio_genai/Login%20Page/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasData) {
-                return const Homepage();
+                return const MainPage();
               } else if (snapshot.hasError) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,

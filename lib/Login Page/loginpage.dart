@@ -1,5 +1,5 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
-import 'package:devfolio_genai/HomePage/homepage.dart';
+import 'package:devfolio_genai/Landing%20Home%20Page/Main_Home.dart';
 import 'package:devfolio_genai/Login%20Page/Forget%20Password/forget_password.dart';
 import 'package:devfolio_genai/Widgets/button.dart';
 import 'package:devfolio_genai/Widgets/dividerwithtext.dart';
@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Fluttertoast.showToast(
           msg: "Logged in using Google Account", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;
@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Fluttertoast.showToast(
           msg: "Logged in Anoymously", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       Fluttertoast.showToast(msg: "Logged in", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;

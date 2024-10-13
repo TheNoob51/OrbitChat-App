@@ -1,5 +1,5 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
-import 'package:devfolio_genai/HomePage/homepage.dart';
+import 'package:devfolio_genai/Landing%20Home%20Page/Main_Home.dart';
 import 'package:devfolio_genai/Widgets/button.dart';
 import 'package:devfolio_genai/Widgets/textfield_login.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
         isloading = true;
       });
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;
