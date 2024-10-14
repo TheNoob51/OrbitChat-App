@@ -3,58 +3,7 @@ import 'package:devfolio_genai/HomePage/homepage.dart';
 import 'package:devfolio_genai/Settings/settings.dart';
 import 'package:devfolio_genai/Widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
-
-// class MainPage extends StatefulWidget {
-//   const MainPage({super.key});
-
-//   @override
-//   State<MainPage> createState() => _MainPageState();
-// }
-
-// class _MainPageState extends State<MainPage> {
-//   int _selectedIndex = 0;
-
-//   // List of pages corresponding to the bottom nav bar
-//   static const List<Widget> _pages = <Widget>[
-//     HomeScreen(),
-//     ChatPage(),
-//     SettingsScreen(),
-//   ];
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: _pages[_selectedIndex],
-//       bottomNavigationBar: BottomNavigationBar(
-//         items: const <BottomNavigationBarItem>[
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.home),
-//             label: 'Home',
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.chat),
-//             label: 'Chatbot',
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.settings),
-//             label: 'Settings',
-//           ),
-//         ],
-//         currentIndex: _selectedIndex,
-//         selectedItemColor: Colors.purple,
-//         onTap: _onItemTapped,
-//       ),
-//     );
-//   }
-// }
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

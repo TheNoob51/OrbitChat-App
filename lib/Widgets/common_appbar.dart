@@ -1,8 +1,8 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
 import 'package:devfolio_genai/Login%20Page/loginpage.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gap/gap.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         }
 
         final String? userName = snapshot.data![0];
-        // final String? email = snapshot.data![1];
+        final String? email = snapshot.data![1];
 
         return AppBar(
           backgroundColor: Colors.transparent,
@@ -56,41 +56,76 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                const Row(
                   children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.person, color: Colors.white),
-                        const Gap(10),
-                        Text(
-                          "Hello, $userName",
-                          style: const TextStyle(
-                              fontSize: 20, color: Colors.white),
-                        ),
-                      ],
+                    Gap(10),
+                    Text(
+                      "OrbitChat",
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-                // const Spacer(),
-                // ElevatedButton(
-                //   style: ElevatedButton.styleFrom(
-                //     backgroundColor: Colors.white,
-                //     shape: const CircleBorder(),
-                //   ),
-                //   onPressed: () async {
-                //     await AuthService().signOut();
-                //     Fluttertoast.showToast(
-                //         msg: "Logged Out", gravity: ToastGravity.BOTTOM);
-                //     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                //         builder: (context) => const LoginScreen()));
-                //   },
-                //   child: const Padding(
-                //     padding: EdgeInsets.all(5.0),
-                //     child: Icon(Icons.logout),
-                //   ),
-                // ),
+                const Spacer(),
+                PopupMenuButton(
+                  offset: const Offset(0, 50),
+                  splashRadius: 20.0,
+                  elevation: 3.2,
+                  icon: const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.black,
+                    ),
+                  ),
+                  itemBuilder: (BuildContext context) {
+                    return <PopupMenuEntry>[
+                      PopupMenuItem(
+                        enabled: false,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hi, $userName",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              email ?? "No email available",
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const PopupMenuDivider(),
+                      PopupMenuItem(
+                        child: ListTile(
+                          leading: const Icon(Icons.logout),
+                          title: const Text("Log out"),
+                          onTap: () async {
+                            await AuthService().signOut();
+                            Fluttertoast.showToast(
+                                msg: "Logged Out",
+                                gravity: ToastGravity.BOTTOM);
+                            //print(context.widget);
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()),
+                            );
+                          },
+                        ),
+                      ),
+                    ];
+                  },
+                ),
               ],
             ),
           ),

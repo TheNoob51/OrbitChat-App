@@ -1,4 +1,5 @@
 import 'package:devfolio_genai/HomePage/OtherPages/Photo%20of%20the%20Day/photo_of_day.dart';
+import 'package:devfolio_genai/HomePage/OtherPages/Planet%20Info/planetInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gap/gap.dart';
@@ -13,13 +14,13 @@ class HomeScreen extends StatelessWidget {
       {
         'title': "Photo of the Day",
         'imageUrl': "https://via.placeholder.com/300", // Placeholder image
-        'page': PhotoOfTheDayPage(), // Add the respective page
+        'page': const PhotoOfTheDayPage(), // Add the respective page
       },
       {
-        'title': "General Facts",
+        'title': "Planet information",
         'imageUrl':
             "https://via.placeholder.com/300/FF5733", // Placeholder image
-        'page': GeneralFactsPage(), // Add the respective page
+        'page': PlanetInfo(), // Add the respective page
       },
       {
         'title': "Temperature of Mars",
@@ -47,13 +48,17 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Gap(20),
-            const Text(
-              "Welcome to OrbitChat",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            const Row(
+              children: [
+                Icon(Icons.explore),
+                Text(
+                  "Explore",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             const Gap(20),
             Expanded(
@@ -134,22 +139,12 @@ class HomeScreen extends StatelessWidget {
 
 // Example pages
 
-class GeneralFactsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("General Facts")),
-      body: Center(child: Text("General Facts Page")),
-    );
-  }
-}
-
 class TemperatureOfMarsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Temperature of Mars")),
-      body: Center(child: Text("Temperature of Mars Page")),
+      appBar: AppBar(title: const Text("Temperature of Mars")),
+      body: const Center(child: Text("Temperature of Mars Page")),
     );
   }
 }
@@ -158,8 +153,8 @@ class SpaceNewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Space News")),
-      body: Center(child: Text("Space News Page")),
+      appBar: AppBar(title: const Text("Space News")),
+      body: const Center(child: Text("Space News Page")),
     );
   }
 }
@@ -168,8 +163,8 @@ class AstronomyPicturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Astronomy Picture")),
-      body: Center(child: Text("Astronomy Picture Page")),
+      appBar: AppBar(title: const Text("Astronomy Picture")),
+      body: const Center(child: Text("Astronomy Picture Page")),
     );
   }
 }

@@ -22,12 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isloading = false;
 
-  //for experimental purpose
-  // void onTab() {
-  //   print('Email: ${emailController.text}');
-  //   print('Password: ${passwordController.text}');
-  // }
-
   void googleSignIn() async {
     String resGo = await AuthService().signInWithGoogle();
     if (resGo == "Success") {
