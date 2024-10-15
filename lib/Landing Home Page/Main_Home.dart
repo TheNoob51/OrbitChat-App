@@ -4,6 +4,7 @@ import 'package:devfolio_genai/Settings/settings.dart';
 import 'package:devfolio_genai/Widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
+import 'package:motion_tab_bar/MotionTabBarController.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,17 +14,34 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  late TabController _tabController;
+  MotionTabBarController? _motionTabBarController;
+  final PageController _pageController =
+      PageController(); // Add a PageController for swipe functionality
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+
+    // Initialize the MotionTabBarController with 3 tabs (Explore, Chatbot, Settings)
+    _motionTabBarController = MotionTabBarController(
+      initialIndex: 0, // Start with "Explore" tab
+      length: 3, // Number of tabs
+      vsync: this, // TickerProvider
+    );
+
+    // Listen to MotionTabBarController changes and update the PageController
+    _motionTabBarController!.addListener(() {
+      if (_motionTabBarController!.index != _pageController.page?.round()) {
+        _pageController.jumpToPage(_motionTabBarController!.index);
+      }
+    });
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    // Dispose of the MotionTabBarController and PageController
+    _motionTabBarController?.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -31,8 +49,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: TabBarView(
-        controller: _tabController,
+      body: PageView(
+        controller:
+            _pageController, // Connect the PageController to allow swiping
+        onPageChanged: (int page) {
+          setState(() {
+            _motionTabBarController!.index = page; // Update tab when swiping
+          });
+        },
         children: const <Widget>[
           HomeScreen(),
           ChatPage(),
@@ -40,17 +64,23 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         ],
       ),
       bottomNavigationBar: MotionTabBar(
-        tabIconSelectedSize: 30,
-        tabBarHeight: MediaQuery.of(context).size.height * 0.09,
+        controller: _motionTabBarController, // Attach MotionTabBarController
         labels: const ["Explore", "Chatbot", "Settings"],
-        initialSelectedTab: "Explore",
+        initialSelectedTab: "Explore", // Initial selected tab
         tabIconColor: Colors.grey,
         tabSelectedColor: Colors.purple,
         icons: const [Icons.explore, Icons.chat, Icons.settings],
         textStyle: const TextStyle(color: Colors.purple),
         onTabItemSelected: (int value) {
+          // Update the MotionTabBarController when a tab is selected
           setState(() {
-            _tabController.index = value;
+            _motionTabBarController!.index = value; // Change tab index
+            _pageController.animateToPage(
+              // Animate page change when a tab is selected
+              value,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
           });
         },
       ),

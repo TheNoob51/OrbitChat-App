@@ -1,3 +1,4 @@
+import 'package:devfolio_genai/HomePage/OtherPages/Astronomy%20Picture/AstronomyPictureLibrary.dart';
 import 'package:devfolio_genai/HomePage/OtherPages/Photo%20of%20the%20Day/photo_of_day.dart';
 import 'package:devfolio_genai/HomePage/OtherPages/Planet%20Info/planetInfo.dart';
 import 'package:devfolio_genai/HomePage/OtherPages/Space%20News/SpaceNewsPage.dart';
@@ -16,32 +17,32 @@ class HomeScreen extends StatelessWidget {
       {
         'title': "Photo of the Day",
         'imageUrl':
-            "https://img.freepik.com/premium-photo/satellite-orbiting-earth-day-sunlight-metallic-surface-satellite-silent-beauty-space-technology-against-background-blue-planet-earth-ozone_507704-10981.jpg", // Placeholder image
+            "assets/images/cover/photo_of_day_cover.png", // Placeholder image
         'page': const PhotoOfTheDayPage(), // Add the respective page
       },
       {
         'title': "Planet information",
         'imageUrl':
-            "https://img3.wallspic.com/crops/5/0/9/4/5/154905/154905-solar_system-planet-atmosphere-world-nature-1920x1080.jpg", // Placeholder image
+            "assets/images/cover/planet_info_cover.jpg", // Placeholder image
         'page': const PlanetInfo(), // Add the respective page
       },
       {
         'title': "Temperature of Mars",
         'imageUrl':
-            "https://www.universetoday.com/wp-content/uploads/2017/11/2-msubiologist.jpg", // Placeholder image
+            "assets/images/cover/mars_temp_cover.jpg", // Placeholder image
         'page': const TemperatureOfMarsPage(), // Add the respective page
       },
       {
         'title': "Space News",
         'imageUrl':
-            "https://static.independent.co.uk/2024/02/28/10/newFile-1.jpg", // Placeholder image
-        'page': SpaceNewsPage(), // Add the respective page
+            "assets/images/cover/space_news_cover.png", // Placeholder image
+        'page': const SpaceNewsPage(), // Add the respective page
       },
       {
-        'title': "Astronomy Picture",
+        'title': "Astronomy Picture Gallery",
         'imageUrl':
-            "https://science.nasa.gov/wp-content/uploads/2023/09/swift_M31_mosaic_1600.webp?w=1024", // Placeholder image
-        'page': AstronomyPicturePage(), // Add the respective page
+            "assets/images/cover/astronomy_photo_cover.png", // Placeholder image
+        'page': const AstronomyPictureLibrary(), // Add the respective page
       },
     ];
 
@@ -51,17 +52,21 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
-              children: [
-                Icon(Icons.explore),
-                Text(
-                  "Explore",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+            const Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Row(
+                children: [
+                  Icon(Icons.explore),
+                  Gap(10),
+                  Text(
+                    "Explore",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             const Gap(20),
             Expanded(
@@ -108,10 +113,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               // Background image
               Positioned.fill(
-                child: Image.network(
-                  item['imageUrl'],
-                  fit: BoxFit.cover,
-                ),
+                child: Image.asset(item['imageUrl'], fit: BoxFit.cover),
               ),
               // Title text
               Positioned(
@@ -142,12 +144,3 @@ class HomeScreen extends StatelessWidget {
 
 // Example pages
 
-class AstronomyPicturePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Astronomy Picture")),
-      body: const Center(child: Text("Astronomy Picture Page")),
-    );
-  }
-}

@@ -63,7 +63,7 @@ class _PhotoOfTheDayPageState extends State<PhotoOfTheDayPage> {
     String formattedDate = DateFormat('MMM d, yyyy').format(dateP);
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color.fromARGB(255, 117, 115, 115),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -78,10 +78,13 @@ class _PhotoOfTheDayPageState extends State<PhotoOfTheDayPage> {
                       _photoData!['url'],
                       fit: BoxFit.cover,
                     )
-                  : const Center(
-                      child: Text(
-                        "Video of the Day",
-                        style: TextStyle(fontSize: 24, color: Colors.white),
+                  : Container(
+                      color: const Color.fromARGB(255, 117, 115, 115),
+                      child: const Center(
+                        child: Text(
+                          "Video of the Day",
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
                       ),
                     ),
             ),

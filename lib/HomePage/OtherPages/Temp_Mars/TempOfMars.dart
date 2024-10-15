@@ -48,7 +48,7 @@ class _TemperatureOfMarsPageState extends State<TemperatureOfMarsPage> {
             'windSpeed': solData['HWS'] != null
                 ? solData['HWS']['av'].toStringAsFixed(2)
                 : 'N/A',
-            'season': solData['Season'] != null ? solData['Season'] : 'N/A',
+            'season': solData['Season'] ?? 'N/A',
             'mostCommonWind':
                 solData['WD'] != null && solData['WD']['most_common'] != null
                     ? solData['WD']['most_common']['compass_point']
@@ -76,118 +76,175 @@ class _TemperatureOfMarsPageState extends State<TemperatureOfMarsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Mars Weather"),
-        backgroundColor: Colors.deepPurple[400],
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: solsData.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple, Colors.black],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: ListView.builder(
-                itemCount: solsData.length,
-                itemBuilder: (context, index) {
-                  final solData = solsData[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 15.0),
-                    child: Card(
-                      elevation: 8,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      color: Colors.black.withOpacity(0.8),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Text(
-                                'Sol ${solData['sol']}',
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.orangeAccent,
+      body: Stack(
+        children: [
+          // Full-page background image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/cover/tempMars_bg.png', // Update this to the path of your image
+              fit: BoxFit.cover,
+            ),
+          ),
+          // Main content including the AppBar and ListView
+          Column(
+            children: [
+              _buildCustomAppBar(), // App bar built manually here
+              Expanded(
+                child: solsData.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        strokeWidth: 12,
+                      ))
+                    : ListView.builder(
+                        itemCount: solsData.length,
+                        itemBuilder: (context, index) {
+                          final solData = solsData[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 15.0),
+                            child: Card(
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              color: Colors.black.withOpacity(
+                                  0.6), // Lighter black for transparency
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        'Sol ${solData['sol']}',
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.orangeAccent,
+                                        ),
+                                      ),
+                                    ),
+                                    const Divider(
+                                      color: Colors.orangeAccent,
+                                      thickness: 1.5,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'Average Temp: ${solData['temperature']} °C',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      'Min Temp: ${solData['minTemp']} °C',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      'Max Temp: ${solData['maxTemp']} °C',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      'Pressure: ${solData['pressure']} Pa',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      'Wind Speed: ${solData['windSpeed']} m/s',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      'Season: ${solData['season']}',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      'Most Common Wind: ${solData['mostCommonWind']}',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                            const Divider(
-                              color: Colors.orangeAccent,
-                              thickness: 1,
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Average Temp: ${solData['temperature']} °C',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Min Temp: ${solData['minTemp']} °C',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Max Temp: ${solData['maxTemp']} °C',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Pressure: ${solData['pressure']} Pa',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Wind Speed: ${solData['windSpeed']} m/s',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Season: ${solData['season']}',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Most Common Wind: ${solData['mostCommonWind']}',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
-                    ),
-                  );
-                },
               ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Transparent AppBar overlaying the background
+  Widget _buildCustomAppBar() {
+    return Container(
+      padding: const EdgeInsets.only(top: 40.0),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.black.withOpacity(0.8), // Semi-transparent overlay
+            Colors.transparent
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ), // Adds padding for status bar
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )), // Placeholder for left spacing
+          const Text(
+            "Mars Weather",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              color: Colors.white, // Text color over transparent background
             ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                solsData = [];
+                fetchMarsWeather();
+              });
+            },
+            tooltip: "Refresh Weather Data",
+          ),
+        ],
+      ),
     );
   }
 }
