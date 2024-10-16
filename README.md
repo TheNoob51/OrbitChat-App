@@ -1,6 +1,8 @@
 # 🚀 OrbitChat - Interactive Space Learning App
 
-![OrbitChat](path_to_image_or_logo) 
+<p align="center">  
+  <img  width="250px" src="https://github.com/TheNoob51/OrbitChat-App/blob/main/assets/images/logo/logo2.png">
+</p>
 
 **OrbitChat** is an educational app developed during the NASA Hackathon with the aim of making space exploration both fun and educational. OrbitChat allows users, especially kids, to interact with space-themed features like real-time information about planets, space news, Mars temperature, NASA's "Photo of the Day," and a NASA Gallery for beautiful imagery. The app also includes an AI-powered chatbot for educational conversations about space.
 
@@ -116,7 +118,7 @@ This project was developed as part of the **NASA Hackathon** by **Team Blackshee
 
 - **Ankur Raj**
 - **Harsh Raj**
-- **[Your Name]**
+- **Gyan Vardhan**
 
 ---
 
