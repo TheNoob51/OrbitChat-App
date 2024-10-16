@@ -75,7 +75,7 @@ class AuthService {
         return "No user is currently signed in";
       }
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
       return "An error occurred while fetching the user name";
     }
   }

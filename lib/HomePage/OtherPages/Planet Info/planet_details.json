@@ -1,0 +1,256 @@
+{
+  "planets": [
+    {
+      "name": "Mercury",
+      "discoveredBy": "Known since ancient times",
+      "discoveredYear": "Prehistory",
+      "distanceFromSun": "57.9 million km",
+      "distanceFromEarth": "77 million km",
+      "radius": "2,439.7 km",
+      "temperature": {
+        "min": -173,
+        "max": 427
+      },
+      "image": {
+        "cover": "assets/images/planets/mercury_cover.png",
+        "icon": "assets/images/planets/mercury.png"
+      },
+      "moons": [],
+      "description": "Mercury is the smallest planet in the Solar System and the closest to the Sun. It has no atmosphere to retain heat, causing temperatures to fluctuate drastically between scorching daytime highs and freezing nighttime lows. Its heavily cratered surface resembles Earth's Moon."
+    },
+    {
+      "name": "Venus",
+      "discoveredBy": "Known since ancient times",
+      "discoveredYear": "Prehistory",
+      "distanceFromSun": "108.2 million km",
+      "distanceFromEarth": "41.4 million km",
+      "radius": "6,051.8 km",
+      "temperature": {
+        "min": 462,
+        "max": 462
+      },
+      "image": {
+        "cover": "assets/images/planets/venus_cover.png",
+        "icon": "assets/images/planets/venus.png"
+      },
+      "moons": [],
+      "description": "Venus, often called Earth's 'sister planet,' is similar in size and structure to Earth but has a thick, toxic atmosphere primarily composed of carbon dioxide. This atmosphere causes an extreme greenhouse effect, making Venus the hottest planet in the Solar System, with surface temperatures hot enough to melt lead."
+    },
+    {
+      "name": "Earth",
+      "discoveredBy": "N/A",
+      "discoveredYear": "N/A",
+      "distanceFromSun": "149.6 million km",
+      "distanceFromEarth": "0 km",
+      "radius": "6,371 km",
+      "temperature": {
+        "min": -89,
+        "max": 58
+      },
+      "image": {
+        "cover": "assets/images/planets/earth_cover.png",
+        "icon": "assets/images/planets/earth.png"
+      },
+      "moons": [
+        {
+          "name": "Moon",
+          "discoveredBy": "Known since ancient times",
+          "discoveredYear": "Prehistory",
+          "radius": "1,737.4 km"
+        }
+      ],
+      "description": "Earth is the only planet known to support life, with a balanced atmosphere and vast amounts of liquid water. Its surface is 70% water, and it has a stable climate thanks to its unique position in the Solar System's habitable zone."
+    },
+    {
+      "name": "Mars",
+      "discoveredBy": "Known since ancient times",
+      "discoveredYear": "Prehistory",
+      "distanceFromSun": "227.9 million km",
+      "distanceFromEarth": "54.6 million km",
+      "radius": "3,389.5 km",
+      "temperature": {
+        "min": -125,
+        "max": 20
+      },
+      "image": {
+        "cover": "assets/images/planets/mars_cover.png",
+        "icon": "assets/images/planets/mars.png"
+      },
+      "moons": [
+        {
+          "name": "Phobos",
+          "discoveredBy": "Asaph Hall",
+          "discoveredYear": "1877",
+          "radius": "11.2 km"
+        },
+        {
+          "name": "Deimos",
+          "discoveredBy": "Asaph Hall",
+          "discoveredYear": "1877",
+          "radius": "6.2 km"
+        }
+      ],
+      "description": "Mars, known as the 'Red Planet' due to its iron oxide-rich soil, has the largest volcano and canyon in the Solar System. Despite its cold desert environment, scientists believe ancient Mars may have had conditions suitable for life, and efforts continue to explore its surface."
+    },
+    {
+      "name": "Jupiter",
+      "discoveredBy": "Known since ancient times",
+      "discoveredYear": "Prehistory",
+      "distanceFromSun": "778.5 million km",
+      "distanceFromEarth": "588 million km",
+      "radius": "69,911 km",
+      "temperature": {
+        "min": -145,
+        "max": -108
+      },
+      "image": {
+        "cover": "assets/images/planets/jupiter_cover.png",
+        "icon": "assets/images/planets/jupiter.png"
+      },
+      "moons": [
+        {
+          "name": "Io",
+          "discoveredBy": "Galileo Galilei",
+          "discoveredYear": "1610",
+          "radius": "1,821.6 km"
+        },
+        {
+          "name": "Europa",
+          "discoveredBy": "Galileo Galilei",
+          "discoveredYear": "1610",
+          "radius": "1,560.8 km"
+        },
+        {
+          "name": "Ganymede",
+          "discoveredBy": "Galileo Galilei",
+          "discoveredYear": "1610",
+          "radius": "2,634.1 km"
+        },
+        {
+          "name": "Callisto",
+          "discoveredBy": "Galileo Galilei",
+          "discoveredYear": "1610",
+          "radius": "2,410.3 km"
+        }
+      ],
+      "description": "Jupiter is the largest planet in the Solar System, known for its iconic Great Red Spot, a massive storm larger than Earth. It has a strong magnetic field and a complex system of rings and moons, including Europa, which may harbor an ocean beneath its icy surface."
+    },
+    {
+      "name": "Saturn",
+      "discoveredBy": "Known since ancient times",
+      "discoveredYear": "Prehistory",
+      "distanceFromSun": "1.4 billion km",
+      "distanceFromEarth": "1.2 billion km",
+      "radius": "58,232 km",
+      "temperature": {
+        "min": -178,
+        "max": -130
+      },
+      "image": {
+        "cover": "assets/images/planets/saturn_cover.png",
+        "icon": "assets/images/planets/saturn.png"
+      },
+      "moons": [
+        {
+          "name": "Titan",
+          "discoveredBy": "Christiaan Huygens",
+          "discoveredYear": "1655",
+          "radius": "2,574.7 km"
+        },
+        {
+          "name": "Enceladus",
+          "discoveredBy": "William Herschel",
+          "discoveredYear": "1789",
+          "radius": "252.1 km"
+        },
+        {
+          "name": "Mimas",
+          "discoveredBy": "William Herschel",
+          "discoveredYear": "1789",
+          "radius": "198.2 km"
+        },
+        {
+          "name": "Rhea",
+          "discoveredBy": "Giovanni Domenico Cassini",
+          "discoveredYear": "1672",
+          "radius": "763.8 km"
+        }
+      ],
+      "description": "Saturn is famous for its stunning ring system, composed of ice and rock particles. It has over 80 moons, including Titan, which has lakes of liquid methane and is the only moon in the Solar System with a thick atmosphere."
+    },
+    {
+      "name": "Uranus",
+      "discoveredBy": "William Herschel",
+      "discoveredYear": "1781",
+      "distanceFromSun": "2.9 billion km",
+      "distanceFromEarth": "2.6 billion km",
+      "radius": "25,362 km",
+      "temperature": {
+        "min": -224,
+        "max": -197
+      },
+      "image": {
+        "cover": "assets/images/planets/uranus_cover.png",
+        "icon": "assets/images/planets/uranus.png"
+      },
+      "moons": [
+        {
+          "name": "Miranda",
+          "discoveredBy": "Gerard Kuiper",
+          "discoveredYear": "1948",
+          "radius": "235.8 km"
+        },
+        {
+          "name": "Ariel",
+          "discoveredBy": "William Lassell",
+          "discoveredYear": "1851",
+          "radius": "578.9 km"
+        },
+        {
+          "name": "Umbriel",
+          "discoveredBy": "William Lassell",
+          "discoveredYear": "1851",
+          "radius": "584.7 km"
+        },
+        {
+          "name": "Titania",
+          "discoveredBy": "William Herschel",
+          "discoveredYear": "1787",
+          "radius": "788.9 km"
+        },
+        {
+          "name": "Oberon",
+          "discoveredBy": "William Herschel",
+          "discoveredYear": "1787",
+          "radius": "761.4 km"
+        }
+      ],
+      "description": "Uranus is unique for its extreme axial tilt, which causes it to rotate on its side. It has a cold atmosphere composed of hydrogen, helium, and methane, which gives it a pale blue color. Uranus has faint rings and many icy moons."
+    },
+    {
+      "name": "Neptune",
+      "discoveredBy": "Johann Galle",
+      "discoveredYear": "1846",
+      "distanceFromSun": "4.5 billion km",
+      "distanceFromEarth": "4.3 billion km",
+      "radius": "24,622 km",
+      "temperature": {
+        "min": -218,
+        "max": -200
+      },
+      "image": {
+        "cover": "assets/images/planets/neptune_cover.png",
+        "icon": "assets/images/planets/neptune.png"
+      },
+      "moons": [
+        {
+          "name": "Triton",
+          "discoveredBy": "William Lassell",
+          "discoveredYear": "1846",
+          "radius": "1,353.4 km"
+        }
+      ],
+      "description": "Neptune is the furthest planet from the Sun and is known for its strong winds, which are the fastest in the Solar System. Its largest moon, Triton, orbits in the opposite direction of Neptune's rotation, and scientists believe it was captured from the Kuiper Belt."
+    }
+  ]
+}
