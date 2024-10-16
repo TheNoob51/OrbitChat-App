@@ -28,6 +28,9 @@ The project was developed as part of a hackathon where the problem statement req
 - **API Integrations:** NASA APIs, Spaceflight News API
 - **Database:** Google Firebase Firestore (for user data, chat history, etc.)
 
+##Final APK
+- [**Google Drive:**](https://drive.google.com/file/d/1lcD9jnhPIVK6u-6FiJ5MmuJqQs4ajMk5/view?usp=sharing)
+
 ## 🛠️ Getting Started
 
 ### Prerequisites
@@ -136,6 +139,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Feel free to raise an issue if you encounter any problems or need further assistance!
 
----
-
-This README provides detailed information about the app, setup instructions, and how others can contribute. Let me know if you'd like any other adjustments!
