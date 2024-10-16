@@ -1,5 +1,5 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
-import 'package:devfolio_genai/HomePage/homepage.dart';
+import 'package:devfolio_genai/Landing%20Home%20Page/Main_Home.dart';
 import 'package:devfolio_genai/Login%20Page/Forget%20Password/forget_password.dart';
 import 'package:devfolio_genai/Widgets/button.dart';
 import 'package:devfolio_genai/Widgets/dividerwithtext.dart';
@@ -22,12 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isloading = false;
 
-  //for experimental purpose
-  // void onTab() {
-  //   print('Email: ${emailController.text}');
-  //   print('Password: ${passwordController.text}');
-  // }
-
   void googleSignIn() async {
     String resGo = await AuthService().signInWithGoogle();
     if (resGo == "Success") {
@@ -37,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Fluttertoast.showToast(
           msg: "Logged in using Google Account", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;
@@ -55,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Fluttertoast.showToast(
           msg: "Logged in Anoymously", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;
@@ -84,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       Fluttertoast.showToast(msg: "Logged in", gravity: ToastGravity.BOTTOM);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;
@@ -93,8 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  final String forget = 'Forgot Password';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +94,13 @@ class _LoginScreenState extends State<LoginScreen> {
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF007BFF), Color(0xFF00C6FF)],
+            colors: [
+              Color(0xFF0B3D91), // Space Cadet
+              Color(0xFF1D2951), // Prussian Blue
+              Color(0xFF2E3A59), // Gunmetal
+              Color(0xFF4B0082), // Indigo
+              Color(0xFF6A5ACD), // Slate Blue
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -126,12 +124,12 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
-                  'assets/images/logo/logo.png',
+                  'assets/images/logo/logo2.png',
                   height: MediaQuery.of(context).size.height * 0.25,
                   width: MediaQuery.of(context).size.height * 0.25,
                 ),
                 const Text(
-                  'Welcome to EduApp',
+                  'Welcome to OrbitChat',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,

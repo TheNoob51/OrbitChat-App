@@ -1,5 +1,5 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
-import 'package:devfolio_genai/HomePage/homepage.dart';
+import 'package:devfolio_genai/Landing%20Home%20Page/Main_Home.dart';
 import 'package:devfolio_genai/Widgets/button.dart';
 import 'package:devfolio_genai/Widgets/textfield_login.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
         isloading = true;
       });
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Homepage()));
+          MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       setState(() {
         isloading = false;
@@ -71,7 +71,13 @@ class _SignUpPageState extends State<SignUpPage> {
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF007BFF), Color(0xFF00C6FF)],
+            colors: [
+              Color(0xFF0B3D91), // Space Cadet
+              Color(0xFF1D2951), // Prussian Blue
+              Color(0xFF2E3A59), // Gunmetal
+              Color(0xFF4B0082), // Indigo
+              Color(0xFF6A5ACD), // Slate Blue
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
