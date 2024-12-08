@@ -28,7 +28,10 @@ The project was developed as to create an educational app that combines entertai
 - **API Integrations:** NASA APIs, Spaceflight News API
 - **Database:** Google Firebase Firestore (for user data, chat history, etc.)
 
-##Final APK
+## Screenshots
+<img alt="SS" width="20%" src="assets/images/logo/1729111797700.jpeg"><img alt="SS" width="20%" src="assets/images/logo/1729111797702.jpeg"><img alt="SS" width="20%" src="assets/images/logo/1729111797707.jpeg"><img alt="SS" width="20%" src="assets/images/logo/1729111797728.jpeg"><img alt="SS" width="20%" src="assets/images/logo/1729111797729.jpeg">
+
+# Final APK
 - [**Google Drive:**](https://drive.google.com/file/d/1lcD9jnhPIVK6u-6FiJ5MmuJqQs4ajMk5/view?usp=sharing)
 
 ## 🛠️ Getting Started
