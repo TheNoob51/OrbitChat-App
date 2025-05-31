@@ -87,8 +87,172 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   double screenWidth = MediaQuery.of(context).size.width;
+  //   double screenHeight = MediaQuery.of(context).size.height;
+  //   double responsiveFontSize = screenWidth * 0.07;
+  //   return Scaffold(
+  //     body: Container(
+  //       alignment: Alignment.center,
+  //       decoration: const BoxDecoration(
+  //         gradient: LinearGradient(
+  //           colors: [
+  //             Color(0xFF0B3D91), // Space Cadet
+  //             Color(0xFF1D2951), // Prussian Blue
+  //             Color(0xFF2E3A59), // Gunmetal
+  //             Color(0xFF4B0082), // Indigo
+  //             Color(0xFF6A5ACD), // Slate Blue
+  //           ],
+  //           begin: Alignment.topCenter,
+  //           end: Alignment.bottomCenter,
+  //         ),
+  //       ),
+  //       child: SingleChildScrollView(
+  //         padding: const EdgeInsets.all(16.0),
+  //         child: Container(
+  //           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(16),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black26.withOpacity(0.2),
+  //                 blurRadius: 10,
+  //                 offset: const Offset(0, 5),
+  //               ),
+  //             ],
+  //           ),
+  //           child: Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: <Widget>[
+  //               Image.asset(
+  //                 'assets/images/logo/logo2.png',
+  //                 height: MediaQuery.of(context).size.height * 0.25,
+  //                 width: MediaQuery.of(context).size.height * 0.25,
+  //               ),
+  //               Text(
+  //                 'Welcome to OrbitChat',
+  //                 style: TextStyle(
+  //                   fontSize: responsiveFontSize,
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Colors.black87,
+  //                 ),
+  //               ),
+  //               const Gap(10),
+  //               const Text(
+  //                 'Login to continue',
+  //                 style: TextStyle(
+  //                   fontSize: 16,
+  //                   color: Colors.grey,
+  //                 ),
+  //               ),
+  //               const Gap(30),
+  //               TextFieldForLogin(
+  //                 label: "Email",
+  //                 iconfor: Icons.email_outlined,
+  //                 textEditingController: emailController,
+  //                 isPass: false,
+  //               ),
+  //               const Gap(20),
+  //               TextFieldForLogin(
+  //                 label: "Password",
+  //                 iconfor: Icons.lock_outline,
+  //                 textEditingController: passwordController,
+  //                 isPass: true,
+  //               ),
+  //               const Gap(10),
+  //               const Align(
+  //                 alignment: Alignment.centerRight,
+  //                 child: ForgotPassword(),
+  //               ),
+  //               const Gap(10),
+  //               ButtonUI(name: "Login", onPressed: loginUser),
+  //               const Gap(20),
+  //               DividerWithText(
+  //                   text: "OR",
+  //                   color: Colors.grey[300]!,
+  //                   textStyle:
+  //                       TextStyle(color: Colors.grey[500]!, fontSize: 12)),
+  //               const Gap(10),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: [
+  //                   ElevatedButton(
+  //                     style: ButtonStyle(
+  //                       backgroundColor:
+  //                           WidgetStateProperty.all<Color>(Colors.white),
+  //                       shape: WidgetStateProperty.all<CircleBorder>(
+  //                         const CircleBorder(),
+  //                       ),
+  //                     ),
+  //                     onPressed: googleSignIn,
+  //                     child: Padding(
+  //                       padding: const EdgeInsets.all(10.0),
+  //                       child: Image.network(
+  //                         'https://img.icons8.com/color/452/google-logo.png',
+  //                         height: 30,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   ElevatedButton(
+  //                     style: ButtonStyle(
+  //                       backgroundColor:
+  //                           WidgetStateProperty.all<Color>(Colors.white),
+  //                       shape: WidgetStateProperty.all<CircleBorder>(
+  //                         const CircleBorder(),
+  //                       ),
+  //                     ),
+  //                     onPressed: signInAnoy,
+  //                     child: Padding(
+  //                       padding: const EdgeInsets.all(10.0),
+  //                       child: Image.network(
+  //                         'https://img.icons8.com/?size=100&id=pETkiIKt6qBf&format=png&color=000000',
+  //                         height: 30,
+  //                       ),
+  //                     ),
+  //                   )
+  //                 ],
+  //               ),
+  //               const Gap(20),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: [
+  //                   const Text("Don't have an account?"),
+  //                   TextButton(
+  //                     onPressed: () {
+  //                       Navigator.push(
+  //                           context,
+  //                           MaterialPageRoute(
+  //                               builder: (context) => const SignUpPage()));
+  //                     },
+  //                     child: const Text(
+  //                       'Sign Up',
+  //                       style: TextStyle(
+  //                         color: Colors.blueAccent,
+  //                         fontWeight: FontWeight.bold,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    // Calculate responsive font sizes
+    double responsiveWelcomeFontSize = screenWidth * 0.07;
+    double responsiveLoginHintFontSize = screenWidth * 0.04;
+
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -105,135 +269,150 @@ class _LoginScreenState extends State<LoginScreen> {
             end: Alignment.bottomCenter,
           ),
         ),
+        // Removed SingleChildScrollView to prevent scrolling
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26.withOpacity(0.2),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  'assets/images/logo/logo2.png',
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  width: MediaQuery.of(context).size.height * 0.25,
-                ),
-                const Text(
-                  'Welcome to OrbitChat',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26.withOpacity(0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
                   ),
-                ),
-                const Gap(10),
-                const Text(
-                  'Login to continue',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
+                ],
+              ),
+              child: Column(
+                mainAxisSize:
+                    MainAxisSize.min, // Ensures column takes minimum space
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // Image sizing adjusted to be more responsive and save vertical space
+                  Image.asset(
+                    'assets/images/logo/logo2.png',
+                    height: screenHeight * 0.20, // Adjusted percentage
+                    width: screenHeight * 0.20, // Adjusted percentage
                   ),
-                ),
-                const Gap(30),
-                TextFieldForLogin(
-                  label: "Email",
-                  iconfor: Icons.email_outlined,
-                  textEditingController: emailController,
-                  isPass: false,
-                ),
-                const Gap(20),
-                TextFieldForLogin(
-                  label: "Password",
-                  iconfor: Icons.lock_outline,
-                  textEditingController: passwordController,
-                  isPass: true,
-                ),
-                const Gap(10),
-                const Align(
-                  alignment: Alignment.centerRight,
-                  child: ForgotPassword(),
-                ),
-                const Gap(10),
-                ButtonUI(name: "Login", onPressed: loginUser),
-                const Gap(20),
-                DividerWithText(
-                    text: "OR",
-                    color: Colors.grey[300]!,
-                    textStyle:
-                        TextStyle(color: Colors.grey[500]!, fontSize: 12)),
-                const Gap(10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all<Color>(Colors.white),
-                        shape: WidgetStateProperty.all<CircleBorder>(
-                          const CircleBorder(),
-                        ),
-                      ),
-                      onPressed: googleSignIn,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image.network(
-                          'https://img.icons8.com/color/452/google-logo.png',
-                          height: 30,
-                        ),
-                      ),
+                  Text(
+                    'Welcome to OrbitChat',
+                    style: TextStyle(
+                      fontSize: responsiveWelcomeFontSize,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all<Color>(Colors.white),
-                        shape: WidgetStateProperty.all<CircleBorder>(
-                          const CircleBorder(),
-                        ),
-                      ),
-                      onPressed: signInAnoy,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image.network(
-                          'https://img.icons8.com/?size=100&id=pETkiIKt6qBf&format=png&color=000000',
-                          height: 30,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const Gap(20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Don't have an account?"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUpPage()));
-                      },
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                  ),
+                  const Gap(10),
+                  Text(
+                    'Login to continue',
+                    style: TextStyle(
+                      fontSize:
+                          responsiveLoginHintFontSize, // Using responsive size
+                      color: Colors.grey,
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                  const Gap(30),
+                  TextFieldForLogin(
+                    label: "Email",
+                    iconfor: Icons.email_outlined,
+                    textEditingController: emailController,
+                    isPass: false,
+                  ),
+                  const Gap(20),
+                  TextFieldForLogin(
+                    label: "Password",
+                    iconfor: Icons.lock_outline,
+                    textEditingController: passwordController,
+                    isPass: true,
+                  ),
+                  const Gap(10),
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: ForgotPassword(),
+                  ),
+                  const Gap(10),
+                  ButtonUI(name: "Login", onPressed: loginUser),
+                  const Gap(20),
+                  DividerWithText(
+                      text: "OR",
+                      color: Colors.grey[300]!,
+                      textStyle:
+                          TextStyle(color: Colors.grey[500]!, fontSize: 12)),
+                  const Gap(10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(Colors.white),
+                          shape: WidgetStateProperty.all<CircleBorder>(
+                            const CircleBorder(),
+                          ),
+                        ),
+                        onPressed: googleSignIn,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          // child: Image.network(
+                          //   'https://img.icons8.com/color/452/google-logo.png',
+                          //   height: 30, // Fixed height for social icons
+                          // ),
+                          child: Image.asset(
+                            'assets/images/logo/google-logo.png',
+                            height: 30, // Fixed height for social icons
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(Colors.white),
+                          shape: WidgetStateProperty.all<CircleBorder>(
+                            const CircleBorder(),
+                          ),
+                        ),
+                        onPressed: signInAnoy,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          // child: Image.network(
+                          //   'https://img.icons8.com/?size=100&id=pETkiIKt6qBf&format=png&color=000000',
+                          //   height: 30, // Fixed height for social icons
+                          // ),
+                          child: Image.asset(
+                            'assets/images/logo/anon-logo.png',
+                            height: 30, // Fixed height for social icons
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const Gap(10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Don't have an account?"),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUpPage()));
+                        },
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

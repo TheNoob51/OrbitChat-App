@@ -39,9 +39,11 @@ class _PlanetInfoState extends State<PlanetInfo> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-                "https://torange.biz/photofxnew/181/IMAGE/rotation-contrast-stained-bright-blue-181766.jpg"),
+            image: AssetImage("assets/images/cover/planet_cover.jpg"),
             fit: BoxFit.cover,
+
+            // image: NetworkImage(
+            //     "https://torange.biz/photofxnew/181/IMAGE/rotation-contrast-stained-bright-blue-181766.jpg"),
           ),
         ),
         child: Column(

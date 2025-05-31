@@ -103,13 +103,13 @@ class _PhotoOfTheDayPageState extends State<PhotoOfTheDayPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Divider(
+                      const Divider(
                         color: Colors.grey,
                         thickness: 2,
                         indent: 150,
                         endIndent: 150,
                       ),
-                      Gap(10),
+                      const Gap(10),
                       Text(
                         _photoData!['title'] ?? "No title",
                         textAlign: TextAlign.center,

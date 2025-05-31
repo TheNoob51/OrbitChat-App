@@ -173,9 +173,8 @@ class PlanetDetailPage extends StatelessWidget {
                     Column(
                       children: planet['moons'].isEmpty
                           ? [
-                              Center(
-                                  child: const Text(
-                                      "No moons found for this planet"))
+                              const Center(
+                                  child: Text("No moons found for this planet"))
                             ]
                           : List.generate(planet['moons'].length, (index) {
                               final moon = planet['moons'][index];

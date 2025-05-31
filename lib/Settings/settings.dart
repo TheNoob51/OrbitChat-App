@@ -8,7 +8,7 @@ class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
@@ -52,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 // Profile Picture
                 const CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/profile_photo.png'),
+                  child: Icon(Icons.person, size: 50, color: Colors.white),
                 ),
                 const Gap(16),
                 // Username

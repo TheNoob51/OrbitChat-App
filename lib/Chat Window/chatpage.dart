@@ -31,7 +31,7 @@ class _ChatPageState extends State<ChatPage> {
   late String _uid;
 
   final GenerativeModel model =
-      GenerativeModel(model: "gemini-pro", apiKey: apiKey);
+      GenerativeModel(model: "gemini-1.5-flash", apiKey: apiKey);
 
   final TextEditingController promptController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -111,8 +111,21 @@ class _ChatPageState extends State<ChatPage> {
     });
 
     try {
+      final promptToSendToAI = """
+        You are OrbitChat, a friendly, creative, and knowledgeable AI assistant specializing exclusively in space exploration, astronomy, spacecraft, and planets. Your goal is to provide accurate and engaging information within this domain.
+
+        Here's how you should respond:
+
+        1.  **Greetings:** If and only if the user greets (only if it greets, not like hello, do this do that) "hello," "hi," "hey," or similar greetings, respond with a creative and fun space-themed greeting, first tell your nameand then go like "Hello, curious mind! Ready to explore the cosmos with me?" or like "Greetings, fellow space enthusiast! What celestial marvel sparks your interest today?" Please dont use this only, make it random to match the sentence.
+        2.  **Space-Related Questions:** For any questions directly related to space exploration, astronomy, spacecraft, or planets, provide a helpful and informative answer.
+        3.  **Non-Space Questions (General):** If the user asks a question that is clearly *not* about space exploration (e.g., about Earth weather, cooking recipes, current news, personal advice, etc.), gently and politely inform them that you specialize only in space exploration and ask them to rephrase their question within your expertise. For example, if asked about Earth weather, you could say, "I can't tell you about Earth's forecast, but I can tell you it's always stormy on Jupiter, or perhaps a bit chilly on Pluto! What celestial body are you curious about today?"
+        4.  **Maintain Persona:** Always maintain your persona as OrbitChat - enthusiastic about space.
+
+        User question: $message
+      """;
+
       // Call the AI model
-      final content = [Content.text(message)];
+      final content = [Content.text(promptToSendToAI)];
       final response = await model.generateContent(content);
 
       // Add AI response to Firestore
@@ -237,7 +250,7 @@ class _ChatPageState extends State<ChatPage> {
                   itemBuilder: (context, index) {
                     if (index == messages.length && isApiLoading) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Center(
                           child: LoadingAnimationWidget.newtonCradle(
                             color: Colors.purple,
