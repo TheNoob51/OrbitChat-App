@@ -4,11 +4,11 @@
   <img  width="250px" src="https://github.com/TheNoob51/OrbitChat-App/blob/main/assets/images/logo/logo2.png">
 </p>
 
-**OrbitChat** is an educational app developed during the NASA Hackathon with the aim of making space exploration both fun and educational. OrbitChat allows users, especially kids, to interact with space-themed features like real-time information about planets, space news, Mars temperature, NASA's "Photo of the Day," and a NASA Gallery for beautiful imagery. The app also includes an AI-powered chatbot for educational conversations about space.
+**OrbitChat** is an educational app developed with the aim of making space exploration both fun and educational. OrbitChat allows users, especially kids, to interact with space-themed features like real-time information about planets, space news, Mars temperature, NASA's "Photo of the Day," and a NASA Gallery for beautiful imagery. The app also includes an AI-powered chatbot for educational conversations about space.
 
 ## 🎯 Main Purpose
 
-The project was developed as part of a hackathon where the problem statement required us to create an educational app that combines entertainment and learning about space. OrbitChat aims to inspire curiosity and a love for space by offering interactive and engaging features.
+The project was developed as to create an educational app that combines entertainment and learning about space. OrbitChat aims to inspire curiosity and a love for space by offering interactive and engaging features.
 
 ## 🌟 Features
 
@@ -27,6 +27,12 @@ The project was developed as part of a hackathon where the problem statement req
 - **Authentication:** Firebase Authentication
 - **API Integrations:** NASA APIs, Spaceflight News API
 - **Database:** Google Firebase Firestore (for user data, chat history, etc.)
+
+## Screenshots
+<img alt="SS" width="18%" src="assets/images/logo/1729111797700.jpeg"><img alt="SS" width="18%" src="assets/images/logo/1729111797702.jpeg"><img alt="SS" width="18%" src="assets/images/logo/1729111797707.jpeg"><img alt="SS" width="18%" src="assets/images/logo/1729111797728.jpeg"><img alt="SS" width="18%" src="assets/images/logo/1729111797729.jpeg">
+
+# Final APK
+- [**Google Drive:**](https://drive.google.com/file/d/1lcD9jnhPIVK6u-6FiJ5MmuJqQs4ajMk5/view?usp=sharing)
 
 ## 🛠️ Getting Started
 
@@ -114,7 +120,7 @@ We welcome contributions! If you'd like to contribute, please follow these steps
 
 ## 🏆 Hackathon Credits
 
-This project was developed as part of the **NASA Hackathon** by **Team Blacksheeps**:
+This project was developed by **Team Blacksheeps**:
 
 - **Ankur Raj**
 - **Harsh Raj**
@@ -136,6 +142,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Feel free to raise an issue if you encounter any problems or need further assistance!
 
----
-
-This README provides detailed information about the app, setup instructions, and how others can contribute. Let me know if you'd like any other adjustments!
