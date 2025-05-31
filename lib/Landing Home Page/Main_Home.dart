@@ -47,6 +47,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Get current theme
+    final isDark = theme.brightness == Brightness.dark; // Check if dark mode
     return Scaffold(
       appBar: const CustomAppBar(),
       body: PageView(
@@ -64,6 +66,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         ],
       ),
       bottomNavigationBar: MotionTabBar(
+        tabBarColor: isDark
+            ? Colors.black // Dark mode color
+            : Colors.white, // Light mode color
         controller: _motionTabBarController, // Attach MotionTabBarController
         labels: const ["Explore", "Chatbot", "Settings"],
         initialSelectedTab: "Explore", // Initial selected tab

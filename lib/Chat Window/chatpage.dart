@@ -192,11 +192,7 @@ class _ChatPageState extends State<ChatPage> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterTop,
-      // appBar: AppBar(
-      //   // Removed title and logout button
-      //   // Optionally, you can add an icon or leave it blank
-      //   title: const Text(''), // Empty title
-      // ),
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -262,6 +258,7 @@ class _ChatPageState extends State<ChatPage> {
 
                     final message = messages[index];
                     bool isUser = message.isUser;
+                    final theme = Theme.of(context);
                     return Align(
                       alignment:
                           isUser ? Alignment.centerRight : Alignment.centerLeft,
@@ -273,14 +270,8 @@ class _ChatPageState extends State<ChatPage> {
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: isUser
-                              ? Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.1)
-                              : Theme.of(context)
-                                  .colorScheme
-                                  .secondary
-                                  .withOpacity(0.1),
+                              ? theme.colorScheme.primary.withOpacity(0.5)
+                              : theme.colorScheme.secondary.withOpacity(0.2),
                           borderRadius: BorderRadius.only(
                             topLeft: const Radius.circular(15),
                             topRight: const Radius.circular(15),
@@ -303,17 +294,18 @@ class _ChatPageState extends State<ChatPage> {
                               styleSheet: MarkdownStyleSheet(
                                 p: TextStyle(
                                   color: isUser
-                                      ? Colors.purple[700]
-                                      : Colors.black,
+                                      ? theme.colorScheme.onPrimary
+                                      : theme.colorScheme.onSurface,
                                 ),
                               ),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               '${message.time.hour.toString().padLeft(2, '0')}:${message.time.minute.toString().padLeft(2, '0')}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 10,
-                                color: Colors.grey,
+                                color: theme.colorScheme.onSurface
+                                    .withOpacity(0.6),
                               ),
                             ),
                           ],
@@ -353,7 +345,7 @@ class _ChatPageState extends State<ChatPage> {
                     shape: WidgetStateProperty.all(const CircleBorder()),
                     padding: WidgetStateProperty.all(const EdgeInsets.all(12)),
                     backgroundColor: WidgetStateProperty.all(
-                        Theme.of(context).colorScheme.primary),
+                        Theme.of(context).colorScheme.primary.withOpacity(0.8)),
                   ),
                   icon: const Icon(Icons.send, size: 30, color: Colors.white),
                   onPressed: () {

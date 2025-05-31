@@ -1,8 +1,10 @@
 import 'package:devfolio_genai/Firebase%20Authentication/authentication.dart';
 import 'package:devfolio_genai/Login%20Page/loginpage.dart';
+import 'package:devfolio_genai/Providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -12,7 +14,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool isDarkMode = false; // For the Dark Mode switch
   String appVersion = '1.0.0';
   @override
   void initState() {
@@ -30,6 +31,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       body: FutureBuilder(
         future: Future.wait([_fetchUserName(), _fetchEmail()]),
@@ -76,12 +79,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: const Text('Dark Mode',
                       style: TextStyle(color: Colors.purple)),
                   trailing: Switch(
-                    value: isDarkMode,
-                    onChanged: (value) {
-                      setState(() {
-                        isDarkMode = value;
-                      });
-                    },
+                    value: themeProvider.themeMode == ThemeMode.dark,
+                    onChanged: (value) => themeProvider.toggleTheme(value),
                     activeColor: Colors.purple,
                   ),
                 ),
