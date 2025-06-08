@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -89,11 +90,15 @@ class _SpaceNewsPageState extends State<SpaceNewsPage> {
                                           topLeft: Radius.circular(15.0),
                                           topRight: Radius.circular(15.0),
                                         ),
-                                        child: Image.network(
-                                          imageUrl,
+                                        child: CachedNetworkImage(
+                                          imageUrl: imageUrl,
                                           fit: BoxFit.cover,
                                           width: double.infinity,
                                           height: 200,
+                                          placeholder: (context, url) => const Center(
+                                              child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         ),
                                       ),
                                     Padding(

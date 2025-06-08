@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
@@ -74,9 +75,13 @@ class _PhotoOfTheDayPageState extends State<PhotoOfTheDayPage> {
             expandedHeight: 300.0,
             flexibleSpace: FlexibleSpaceBar(
               background: _photoData!['media_type'] == 'image'
-                  ? Image.network(
-                      _photoData!['url'],
+                  ? CachedNetworkImage(
+                      imageUrl: _photoData!['url'],
                       fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     )
                   : Container(
                       color: const Color.fromARGB(255, 117, 115, 115),
