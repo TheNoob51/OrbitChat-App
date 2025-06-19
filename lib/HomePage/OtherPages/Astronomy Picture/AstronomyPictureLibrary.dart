@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
@@ -179,13 +180,13 @@ class _AstronomyPictureLibraryState extends State<AstronomyPictureLibrary> {
               onTap: () => _showEnlargedImage(imageUrl),
               child: Hero(
                 tag: imageUrl, // Use Hero animation with tag
-                child: Image.network(
-                  imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
                   fit: BoxFit.cover,
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
-                  },
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.error),
                 ),
               ),
             );
@@ -236,7 +237,12 @@ class _AstronomyPictureLibraryState extends State<AstronomyPictureLibrary> {
           onTap: () {}, // Prevent closing when tapping on the image itself
           child: Hero(
             tag: _enlargedImageUrl!, // Hero animation with same tag
-            child: Image.network(_enlargedImageUrl!),
+            child: CachedNetworkImage(
+              imageUrl: _enlargedImageUrl!,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
         ),
       ),
