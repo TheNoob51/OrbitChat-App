@@ -47,7 +47,8 @@ class AuthProvider with ChangeNotifier {
     super.dispose();
   }
 
-  Future<void> _executeAuthAction(Future<UserCredential?> Function() action) async {
+  Future<void> _executeAuthAction(
+      Future<UserCredential?> Function() action) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -61,7 +62,6 @@ class AuthProvider with ChangeNotifier {
         // If there's no current user and the action didn't result in one,
         // it implies a silent failure or cancellation (e.g. Google Sign In cancelled by user)
         // Firebase specific errors are caught in the catch block.
-      if (userCredential == null && _currentUser == null) {
         _errorMessage = "Authentication process was cancelled or failed.";
       } else if (userCredential != null) {
         _errorMessage = null; // Clear error on successful auth
@@ -77,16 +77,64 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> signInWithEmailPassword(String email, String password) async {
-    await _executeAuthAction(
-        () => _authService.signInWithEmailAndPassword(email, password));
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      final String result =
+          await _authService.loginUser(email: email, password: password);
+      if (result == "Success") {
+        // User will be updated by authStateChanges listener
+        _errorMessage = null;
+      } else {
+        _errorMessage = result;
+      }
+    } catch (e) {
+      _errorMessage = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   Future<void> signInWithGoogle() async {
-    await _executeAuthAction(() => _authService.signInWithGoogle());
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      final String result = await _authService.signInWithGoogle();
+      if (result == "Success") {
+        // User will be updated by authStateChanges listener
+        _errorMessage = null;
+      } else {
+        _errorMessage = result;
+      }
+    } catch (e) {
+      _errorMessage = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   Future<void> signInAnonymously() async {
-    await _executeAuthAction(() => _authService.signInAnonymously());
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      final String result = await _authService.signInAnonymously();
+      if (result == "Success") {
+        // User will be updated by authStateChanges listener
+        _errorMessage = null;
+      } else {
+        _errorMessage = result;
+      }
+    } catch (e) {
+      _errorMessage = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   Future<void> signOut() async {
@@ -106,8 +154,8 @@ class AuthProvider with ChangeNotifier {
       notifyListeners(); // Notify if error during signout
     }
     // finally {
-      // _isLoading = false; // Let _onAuthStateChanged handle this
-      // notifyListeners();
+    // _isLoading = false; // Let _onAuthStateChanged handle this
+    // notifyListeners();
     // }
   }
 }

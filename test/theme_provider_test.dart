@@ -28,16 +28,17 @@ void main() {
       expect(themeProvider.themeMode, ThemeMode.light);
     });
 
-    test('toggleTheme updates themeMode and saves to SharedPreferences', () async {
+    test('toggleTheme updates themeMode and saves to SharedPreferences',
+        () async {
       // Toggle to dark mode
       await themeProvider.toggleTheme(true);
       expect(themeProvider.themeMode, ThemeMode.dark);
-      expect(await sharedPreferences.getBool('isDarkMode'), true);
+      expect(sharedPreferences.getBool('isDarkMode'), true);
 
       // Toggle back to light mode
       await themeProvider.toggleTheme(false);
       expect(themeProvider.themeMode, ThemeMode.light);
-      expect(await sharedPreferences.getBool('isDarkMode'), false);
+      expect(sharedPreferences.getBool('isDarkMode'), false);
     });
 
     test('loads theme from SharedPreferences on initialization', () async {
@@ -58,7 +59,7 @@ void main() {
       expect(anotherThemeProvider.themeMode, ThemeMode.light);
     });
 
-     test('toggleTheme notifies listeners', () async {
+    test('toggleTheme notifies listeners', () async {
       bool listenerCalled = false;
       themeProvider.addListener(() {
         listenerCalled = true;
