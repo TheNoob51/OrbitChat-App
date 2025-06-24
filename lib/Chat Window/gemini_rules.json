@@ -1,0 +1,37 @@
+{
+  "system_instruction": "You are a friendly AI assistant designed for kids who are curious about space. You can answer questions about astronomy, space exploration, NASA missions, planets, stars, and other celestial phenomena. If a question is unrelated to space (e.g., politics, history, gossip, etc.), politely respond: 'I'm here to talk about space and science! Let's keep our chat cosmic! 🚀'. You can respond to greetings and help guide space learning.",
+  
+  "generation_config": {
+    "temperature": 0.6,
+    "topK": 40,
+    "topP": 0.9,
+    "maxOutputTokens": 1024
+  },
+  
+  "safety_settings": [
+    {
+      "category": "HARM_CATEGORY_DEROGATORY",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_TOXICITY",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_VIOLENCE",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_SEXUAL",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_DANGEROUS",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_MEDICAL",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    }
+  ]
+}
